@@ -6,7 +6,8 @@
     },
     "keywords": [
         "xdg",
-        "path"
+        "path",
+        "basedir"
     ],
     "scripts": {
         "test": "nodeunit tests/*.tests.js"
