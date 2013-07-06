@@ -15,6 +15,21 @@ exports["config home is $XDG_CONFIG_HOME if set"] =
         test.equal("/elsewhere", basedir.configHome());
     });
 
+exports["config home is $HOME/.local/share if $XDG_DATA_HOME is not set"] =
+    testWithEnv({
+        "HOME": "/home/bob"
+    }, function(test) {
+        test.equal("/home/bob/.local/share", basedir.dataHome());
+    });
+
+exports["data home is $XDG_DATA_HOME if set"] =
+    testWithEnv({
+        "HOME": "/home/bob",
+        "XDG_DATA_HOME": "/elsewhere"
+    }, function(test) {
+        test.equal("/elsewhere", basedir.dataHome());
+    });
+
 function testWithEnv(env, func) {
     return function(test) {
         var oldEnv = {};
