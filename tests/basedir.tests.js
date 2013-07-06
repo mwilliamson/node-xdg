@@ -15,6 +15,13 @@ exports["config home is $XDG_CONFIG_HOME if set"] =
         test.equal("/elsewhere", basedir.configHome());
     });
 
+exports["config path joins config home with relative path"] =
+    testWithEnv({
+        "HOME": "/home/bob",
+    }, function(test) {
+        test.equal("/home/bob/.config/app/config", basedir.configPath("app/config"));
+    });
+
 exports["config home is $HOME/.local/share if $XDG_DATA_HOME is not set"] =
     testWithEnv({
         "HOME": "/home/bob"
@@ -39,7 +46,11 @@ function testWithEnv(env, func) {
         }
         func(test);
         for (key in env) {
-            process.env[key] = oldEnv[key];
+            if (oldEnv[key] === undefined) {
+                delete process.env[key];
+            } else {
+                process.env[key] = oldEnv[key];
+            }
         }
         test.done();
     }
