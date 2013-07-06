@@ -15,8 +15,11 @@ and no specific data directories are set:
 var basedir = require("xdg").basedir;
 
 var configHome = basedir.configHome(); // == /home/bob/.config
-var configPath = basedir.configPath("app/config"); // == /home/bob/.config/app/config
+var configPath = basedir.configPath("film-catalog/config"); // == /home/bob/.config/film-catalog/config
 
 var dataHome = basedir.dataHome(); // == /home/bob/.local/share
-var dataPath = basedir.dataPath("app/data"); // == /home/bob/.local/share/app/data
+var dataPath = basedir.dataPath("film-catalog/films"); // == /home/bob/.local/share/film-catalog/films
+
+var cacheHome = basedir.cacheHome(); // == /home/bob/.cache
+var cachePath = basedir.cachePath("film-catalog/thumbnails"); // == /home/bob/.cache/film-catalog/thumbnails
 ```
